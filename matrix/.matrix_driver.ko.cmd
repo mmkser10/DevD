@@ -1,0 +1,1 @@
+cmd_/root/raspberry/DD/matrix/matrix_driver.ko := arm-linux-gnueabihf-ld -EL -r  -T ./scripts/module-common.lds --build-id  -o /root/raspberry/DD/matrix/matrix_driver.ko /root/raspberry/DD/matrix/matrix_driver.o /root/raspberry/DD/matrix/matrix_driver.mod.o

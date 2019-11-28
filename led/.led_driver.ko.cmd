@@ -1,0 +1,1 @@
+cmd_/root/raspberry/DD/led/led_driver.ko := arm-linux-gnueabihf-ld -EL -r  -T ./scripts/module-common.lds --build-id  -o /root/raspberry/DD/led/led_driver.ko /root/raspberry/DD/led/led_driver.o /root/raspberry/DD/led/led_driver.mod.o

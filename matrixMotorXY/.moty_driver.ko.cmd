@@ -1,0 +1,1 @@
+cmd_/root/raspberry/DD/matrixMotorXY/moty_driver.ko := arm-linux-gnueabihf-ld -EL -r  -T ./scripts/module-common.lds --build-id  -o /root/raspberry/DD/matrixMotorXY/moty_driver.ko /root/raspberry/DD/matrixMotorXY/moty_driver.o /root/raspberry/DD/matrixMotorXY/moty_driver.mod.o

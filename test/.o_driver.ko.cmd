@@ -1,0 +1,1 @@
+cmd_/root/raspberry/DD/test/o_driver.ko := arm-linux-gnueabihf-ld -EL -r  -T ./scripts/module-common.lds --build-id  -o /root/raspberry/DD/test/o_driver.ko /root/raspberry/DD/test/o_driver.o /root/raspberry/DD/test/o_driver.mod.o
