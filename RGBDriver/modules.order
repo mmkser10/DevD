@@ -1,0 +1,4 @@
+kernel//root/raspberry/DevD/RGBDriver/motS_driver.ko
+kernel//root/raspberry/DevD/RGBDriver/motG_driver.ko
+kernel//root/raspberry/DevD/RGBDriver/motR_driver.ko
+kernel//root/raspberry/DevD/RGBDriver/mat_driver.ko
