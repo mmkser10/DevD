@@ -63,15 +63,15 @@ int main(int argc, char **argv)
         printf("motorSENSOR create error");
         exit(1);
     }
+    
+    motS=pthread_join(motS_id, &t_return);
+
 
     sensor=pthread_create(&sensor_id, NULL, thread_sensor, NULL);
     if(sensor < 0){
         printf("motorSENSOR create error");
         exit(1);
     }
-
-
-    motS=pthread_join(motS_id, &t_return);
 
     sensor=pthread_join(sensor_id, &t_return);
 
@@ -133,6 +133,12 @@ int main(int argc, char **argv)
 
 
 
+        motR=pthread_create(&motR_id, NULL, thread_motR, (void *)&data);
+        if(motR < 0){
+            printf("motor90 degree create error");
+            exit(1);
+        }
+
         motG=pthread_create(&motG_id, NULL, thread_motG, NULL );
         if(motG < 0){
             printf("motor180 degree create error");
@@ -140,14 +146,8 @@ int main(int argc, char **argv)
         }
 
 
-
-        motR=pthread_create(&motR_id, NULL, thread_motR, (void *)&data);
-        if(motR < 0){
-            printf("motor90 degree create error");
-            exit(1);
-        }
-        motG=pthread_join(motG_id, &t_return);
         motR=pthread_join(motR_id, &t_return);
+        motG=pthread_join(motG_id, &t_return);
 
 
 
@@ -274,9 +274,9 @@ void *thread_sensor(void *arg){
     }
     else if(26000.0<=r_value<=32000.0 && 10000.0<=b_value<=13000.0 && 9000.0<=g_value<=11000.0){
         printf("IT'S 'ORANGE'!\n");
-        colorInt = 4;
-        count[3] += 1;
-    }
+    colorInt = 4;
+    count[3] += 1;
+}
     else if(7000.0<=r_value<=9000.0 && 11000.0<=b_value<=14000.0 && 10000.0<=g_value<=13000.0){
         printf("IT'S 'GREEN'!\n");
         colorInt = 5;
