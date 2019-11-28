@@ -87,13 +87,13 @@ int main(int argc, char **argv)
             printf("motor180 degree create error");
             exit(1);
         }
+        motx=pthread_join(motor180x_id, &t_return);
 
         moty=pthread_create(&motor180y_id, NULL, thread_motor180y, NULL);
         if(moty < 0){
             printf("motor90 degree create error");
             exit(1);
         }
-        motx=pthread_join(motor180x_id, &t_return);
         moty=pthread_join(motor180y_id, &t_return);
     }
 
@@ -130,14 +130,12 @@ void *thread_motor180y(void *arg) {
         fprintf(stderr, "Can't open %s\n", MOTOR180y_FILE_NAME);
         return -1;
     }
-    
-    sleep(1);
+
     data = 0;
     write(fdY, &data, sizeof(char));
-    sleep(1);
+	
     data = 1;
     write(fdY, &data, sizeof(char));
-
     close(fdY);
     return 0;
 }
