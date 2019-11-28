@@ -104,7 +104,7 @@ static int motor180y_write(struct file *minode, const char *gdata, size_t length
 
 
     if(tmp_buf==0){
-        for(x=0;x<=30;x++){
+        for(x=0;x<=35;x++){
             setClock=(minAngle+((maxAngle-minAngle)/40*x));
             clrClock=frequency-setClock;
             *(motor180y+7)=(0x01<<GPIO);
@@ -114,7 +114,7 @@ static int motor180y_write(struct file *minode, const char *gdata, size_t length
         }
     }
     else{
-        for(x=30;x>=0;x--){
+        for(x=35;x>=0;x--){
             setClock=(minAngle+((maxAngle-minAngle)/40*x));
             clrClock=frequency-setClock;
             *(motor180y+7)=(0x01<<GPIO);
