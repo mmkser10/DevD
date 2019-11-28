@@ -1,2 +1,2 @@
-/root/raspberry/DD/matrixMotorXY/mat_driver.ko
-/root/raspberry/DD/matrixMotorXY/mat_driver.o
+/root/raspberry/DevD/matrixMotorXY/mat_driver.ko
+/root/raspberry/DevD/matrixMotorXY/mat_driver.o

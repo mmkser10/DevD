@@ -18,7 +18,7 @@
 #define motor180x_MAJOR	222
 #define motor180x_NAME	"MOTOR180X_DRIVER"
 #define GPIO_SIZE	256
-#define GPIO        2
+#define GPIO        	10
 
 
 char motor180x_usage=0;

@@ -17,7 +17,7 @@
 #define motor180y_MAJOR	223
 #define motor180y_NAME	"MOTOR180Y_DRIVER"
 #define GPIO_SIZE	256
-#define GPIO        3
+#define GPIO        11
 
 char motor180y_usage=0;
 static void *motor180y_map;

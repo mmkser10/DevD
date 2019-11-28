@@ -1,8 +1,8 @@
-cmd_/root/raspberry/DD/matrixMotorXY/mat_driver.o := arm-linux-gnueabihf-gcc -Wp,-MD,/root/raspberry/DD/matrixMotorXY/.mat_driver.o.d  -nostdinc -isystem /root/raspberry/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/../lib/gcc/arm-linux-gnueabihf/4.8.3/include -I./arch/arm/include -Iarch/arm/include/generated/uapi -Iarch/arm/include/generated  -Iinclude -I./arch/arm/include/uapi -Iarch/arm/include/generated/uapi -I./include/uapi -Iinclude/generated/uapi -include ./include/linux/kconfig.h -D__KERNEL__ -mlittle-endian -Iarch/arm/mach-bcm2709/include -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -Werror-implicit-function-declaration -Wno-format-security -std=gnu89 -fno-PIE -fno-dwarf2-cfi-asm -fno-omit-frame-pointer -mapcs -mno-sched-prolog -fno-ipa-sra -mabi=aapcs-linux -mno-thumb-interwork -mfpu=vfp -funwind-tables -marm -D__LINUX_ARM_ARCH__=7 -march=armv7-a -msoft-float -Uarm -fno-delete-null-pointer-checks -Wno-maybe-uninitialized -O2 --param=allow-store-data-races=0 -Wframe-larger-than=1024 -fno-stack-protector -Wno-unused-but-set-variable -fno-omit-frame-pointer -fno-optimize-sibling-calls -fno-var-tracking-assignments -pg -Wdeclaration-after-statement -Wno-pointer-sign -fno-strict-overflow -fconserve-stack -Werror=implicit-int -Werror=strict-prototypes -DCC_HAVE_ASM_GOTO  -DMODULE  -D"KBUILD_STR(s)=\#s" -D"KBUILD_BASENAME=KBUILD_STR(mat_driver)"  -D"KBUILD_MODNAME=KBUILD_STR(mat_driver)" -c -o /root/raspberry/DD/matrixMotorXY/.tmp_mat_driver.o /root/raspberry/DD/matrixMotorXY/mat_driver.c
+cmd_/root/raspberry/DevD/matrixMotorXY/mat_driver.o := arm-linux-gnueabihf-gcc -Wp,-MD,/root/raspberry/DevD/matrixMotorXY/.mat_driver.o.d  -nostdinc -isystem /root/raspberry/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/../lib/gcc/arm-linux-gnueabihf/4.8.3/include -I./arch/arm/include -Iarch/arm/include/generated/uapi -Iarch/arm/include/generated  -Iinclude -I./arch/arm/include/uapi -Iarch/arm/include/generated/uapi -I./include/uapi -Iinclude/generated/uapi -include ./include/linux/kconfig.h -D__KERNEL__ -mlittle-endian -Iarch/arm/mach-bcm2709/include -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -Werror-implicit-function-declaration -Wno-format-security -std=gnu89 -fno-PIE -fno-dwarf2-cfi-asm -fno-omit-frame-pointer -mapcs -mno-sched-prolog -fno-ipa-sra -mabi=aapcs-linux -mno-thumb-interwork -mfpu=vfp -funwind-tables -marm -D__LINUX_ARM_ARCH__=7 -march=armv7-a -msoft-float -Uarm -fno-delete-null-pointer-checks -Wno-maybe-uninitialized -O2 --param=allow-store-data-races=0 -Wframe-larger-than=1024 -fno-stack-protector -Wno-unused-but-set-variable -fno-omit-frame-pointer -fno-optimize-sibling-calls -fno-var-tracking-assignments -pg -Wdeclaration-after-statement -Wno-pointer-sign -fno-strict-overflow -fconserve-stack -Werror=implicit-int -Werror=strict-prototypes -DCC_HAVE_ASM_GOTO  -DMODULE  -D"KBUILD_STR(s)=\#s" -D"KBUILD_BASENAME=KBUILD_STR(mat_driver)"  -D"KBUILD_MODNAME=KBUILD_STR(mat_driver)" -c -o /root/raspberry/DevD/matrixMotorXY/.tmp_mat_driver.o /root/raspberry/DevD/matrixMotorXY/mat_driver.c
 
-source_/root/raspberry/DD/matrixMotorXY/mat_driver.o := /root/raspberry/DD/matrixMotorXY/mat_driver.c
+source_/root/raspberry/DevD/matrixMotorXY/mat_driver.o := /root/raspberry/DevD/matrixMotorXY/mat_driver.c
 
-deps_/root/raspberry/DD/matrixMotorXY/mat_driver.o := \
+deps_/root/raspberry/DevD/matrixMotorXY/mat_driver.o := \
   include/linux/init.h \
     $(wildcard include/config/broken/rodata.h) \
     $(wildcard include/config/lto.h) \
@@ -591,6 +591,6 @@ deps_/root/raspberry/DD/matrixMotorXY/mat_driver.o := \
   include/linux/delay.h \
   arch/arm/include/asm/delay.h \
 
-/root/raspberry/DD/matrixMotorXY/mat_driver.o: $(deps_/root/raspberry/DD/matrixMotorXY/mat_driver.o)
+/root/raspberry/DevD/matrixMotorXY/mat_driver.o: $(deps_/root/raspberry/DevD/matrixMotorXY/mat_driver.o)
 
-$(deps_/root/raspberry/DD/matrixMotorXY/mat_driver.o):
+$(deps_/root/raspberry/DevD/matrixMotorXY/mat_driver.o):
