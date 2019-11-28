@@ -14,7 +14,7 @@
 #include <linux/wait.h>
 #include <linux/delay.h>
 
-#define motorSENSOR_MAJOR	21
+#define motorSENSOR_MAJOR	221
 #define motorSENSOR_NAME	"MOTORSENSOR_DRIVER"
 #define GPIO_SIZE	256
 #define GPIO        10
@@ -104,7 +104,7 @@ static int motorSENSOR_write(struct file *minode, const char *gdata, size_t leng
 
 
     if(tmp_buf==0){
-        for(x=30;x<=60;x++){
+        for(x=0;x<=30;x++){
             setClock=(minAngle+((maxAngle-minAngle)/60*x));
             clrClock=frequency-setClock;
             *(motorSENSOR+7)=(0x01<<GPIO);
@@ -114,7 +114,7 @@ static int motorSENSOR_write(struct file *minode, const char *gdata, size_t leng
         }
     }
     else{
-        for(x=60;x>=30;x--){
+        for(x=30;x>=0;x--){
             setClock=(minAngle+((maxAngle-minAngle)/60*x));
             clrClock=frequency-setClock;
             *(motorSENSOR+7)=(0x01<<GPIO);
