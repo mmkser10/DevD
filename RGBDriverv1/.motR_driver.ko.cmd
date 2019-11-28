@@ -1,0 +1,1 @@
+cmd_/root/raspberry/DevD/RGBDriverv1/motR_driver.ko := arm-linux-gnueabihf-ld -EL -r  -T ./scripts/module-common.lds --build-id  -o /root/raspberry/DevD/RGBDriverv1/motR_driver.ko /root/raspberry/DevD/RGBDriverv1/motR_driver.o /root/raspberry/DevD/RGBDriverv1/motR_driver.mod.o

@@ -20,14 +20,18 @@ __attribute__((section("__versions"))) = {
 	{ 0xb344870e, __VMLINUX_SYMBOL_STR(module_layout) },
 	{ 0x6bc3fbc0, __VMLINUX_SYMBOL_STR(__unregister_chrdev) },
 	{ 0xfb88e8b1, __VMLINUX_SYMBOL_STR(__register_chrdev) },
-	{ 0x79c5a9f0, __VMLINUX_SYMBOL_STR(ioremap) },
-	{ 0x8e865d3c, __VMLINUX_SYMBOL_STR(arm_delay_ops) },
-	{ 0x7d11c268, __VMLINUX_SYMBOL_STR(jiffies) },
+	{ 0xf4fa543b, __VMLINUX_SYMBOL_STR(arm_copy_to_user) },
 	{ 0xfa2a45e, __VMLINUX_SYMBOL_STR(__memzero) },
 	{ 0x28cc25db, __VMLINUX_SYMBOL_STR(arm_copy_from_user) },
 	{ 0x27e1a049, __VMLINUX_SYMBOL_STR(printk) },
-	{ 0x2e5810c6, __VMLINUX_SYMBOL_STR(__aeabi_unwind_cpp_pr1) },
+	{ 0xd6b8e852, __VMLINUX_SYMBOL_STR(request_threaded_irq) },
+	{ 0x79c5a9f0, __VMLINUX_SYMBOL_STR(ioremap) },
+	{ 0xd85cd67e, __VMLINUX_SYMBOL_STR(__wake_up) },
+	{ 0xf20dabd8, __VMLINUX_SYMBOL_STR(free_irq) },
+	{ 0x14b94ab8, __VMLINUX_SYMBOL_STR(gpiod_to_irq) },
+	{ 0xcd387ee9, __VMLINUX_SYMBOL_STR(gpio_to_desc) },
 	{ 0xedc03953, __VMLINUX_SYMBOL_STR(iounmap) },
+	{ 0x2e5810c6, __VMLINUX_SYMBOL_STR(__aeabi_unwind_cpp_pr1) },
 	{ 0xb1ad28e0, __VMLINUX_SYMBOL_STR(__gnu_mcount_nc) },
 };
 
@@ -37,4 +41,4 @@ __attribute__((section(".modinfo"))) =
 "depends=";
 
 
-MODULE_INFO(srcversion, "2AB699EA2B5B61803A117F7");
+MODULE_INFO(srcversion, "C61DF13B661BCF082A28509");
