@@ -8,183 +8,173 @@
 #include <unistd.h>
 #include <sys/time.h>
 
-#define MOTORSENSOR_FILE_NAME   "/dev/motS_driver"
-#define MOTORGATE_FILE_NAME     "/dev/motG_driver"
-#define MOTORROUTE_FILE_NAME    "/dev/motR_driver"
-#define MATRIX_FILE_NAME        "/dev/mat_driver"
+#define MOTOR180x_FILE_NAME "/dev/motx_driver"
+#define MOTOR180y_FILE_NAME "/dev/moty_driver"
+#define MOTOR180z_FILE_NAME "/dev/motz_driver"
+#define MATRIX_FILE_NAME "/dev/mat_driver"
 
-
-void *thread_motS(void *arg);
-void *thread_motG(void *arg);
-void *thread_motR(void *arg);
+void *thread_motor180x(void *arg);
+void *thread_motor180y(void *arg);
+void *thread_motor180z(void *arg);
 
 int main(int argc, char **argv)
 {
+	int fd, data, motx, moty, motz;
+	int check=1;
+	int Xangle, Yangle;
 
-    pthread_t motS_id;
-    pthread_t motG_id;
-    pthread_t motR_id;
+	pthread_t motor180x_id;
+	pthread_t motor180y_id;
+	pthread_t motor180z_id;
 
-    int fd, data, motS, motG, motR;
-    int check=1;
-    void *t_return;
+	void *t_return;
 
-    char num[9][5] = {
-            0x6, 0x6, 0x6, 0x6, 0x6, //1
-            0x0, 0x6, 0x0, 0x3, 0x0, //2
-            0x0, 0x6, 0x0, 0x6, 0x0, //3
-            0x2, 0x2, 0x0, 0x6, 0x6, //4
-            0x0, 0x3, 0x0, 0x6, 0x0, //5
-            0x0, 0x3, 0x0, 0x2, 0x0, //6
-            0x0, 0x6, 0x6, 0x6, 0x6, //7
-            0x0, 0x2, 0x0, 0x2, 0x0, //8
-            0x0, 0x2, 0x0, 0x6, 0x0, //9
-    };
+	char num[9][5] = {
+		0x6, 0x6, 0x6, 0x6, 0x6, //1
+		0x0, 0x6, 0x0, 0x3, 0x0, //2
+		0x0, 0x6, 0x0, 0x6, 0x0, //3
+		0x2, 0x2, 0x0, 0x6, 0x6, //4
+		0x0, 0x3, 0x0, 0x6, 0x0, //5
+		0x0, 0x3, 0x0, 0x2, 0x0, //6
+		0x0, 0x6, 0x6, 0x6, 0x6, //7
+		0x0, 0x2, 0x0, 0x2, 0x0, //8
+		0x0, 0x2, 0x0, 0x6, 0x0, //9
+	};
 
-    char color[6][5] = {
-            0x1, 0x2, 0x1, 0x3, 0x2, // 빨
-            0x4, 0x3, 0x2, 0x2, 0x4, // 초
-            0x1, 0x2, 0x1, 0x2, 0x1, // 파
-            0x2, 0x2, 0x5, 0x5, 0x5, // 노
-            0x1, 0x2, 0x1, 0x3, 0x3, // 보
-            0x0, 0x2, 0x2, 0x2, 0x0, // 주
-    };
+	char color[6][5] = {
+		0x1, 0x2, 0x1, 0x3, 0x2, // 빨
+		0x4, 0x3, 0x2, 0x2, 0x4, // 초
+		0x1, 0x2, 0x1, 0x2, 0x1, // 파
+		0x2, 0x2, 0x5, 0x5, 0x5, // 노
+		0x1, 0x2, 0x1, 0x3, 0x3, // 보
+		0x0, 0x2, 0x2, 0x2, 0x0, // 주
+	};
 
+	fd = open(MATRIX_FILE_NAME, O_RDWR);
+	if(fd < 0){
+		fprintf(stderr, "Can't open %s\n",MATRIX_FILE_NAME);
+		return -1;
+	}
 
-    motS=pthread_create(&motS_id, NULL, thread_motS, NULL);
-    if(motS < 0){
-        printf("motorSENSOR create error");
-        exit(1);
-    }
-    motS=pthread_join(motS_id, &t_return);
+	while(check) {
+		printf("Enter \n1. Red\n2. Green\n3. Blue\n4. Yellow\n5. Purple\n6. Orange\n");
+		scanf("%d", &data);
 
+		Yangle = 1;
+		moty=pthread_create(&motor180y_id, NULL, thread_motor180y, (void *)&Yangle);
 
+		if(moty < 0){
+			printf("motor180 degree create error");
+			exit(1);
+		}
+		moty=pthread_join(motor180y_id, &t_return);
 
-    fd = open(MATRIX_FILE_NAME, O_RDWR);
-    if(fd < 0){
-        fprintf(stderr, "Can't open %s\n",MATRIX_FILE_NAME);
-        return -1;
-    }
+		/* color sensor code...*/
+		switch (data) {
 
-
-    while(check) {
-        printf("Enter \n1. Red\n2. Green\n3. Blue\n4. Yellow\n5. Purple\n6. Orange\n");
-        scanf("%d", &data);
-
-        switch (data) {
-            case 1 :
-                write(fd, color[data - 1], sizeof(char));
-                break;
-            case 2 :
-                write(fd, color[data - 1], sizeof(char));
-                break;
-            case 3 :
-                write(fd, color[data - 1], sizeof(char));
-                break;
-            case 4 :
-                write(fd, color[data - 1], sizeof(char));
-                break;
-            case 5 :
-                write(fd, color[data - 1], sizeof(char));
-                break;
-            case 6 :
-                write(fd, color[data - 1], sizeof(char));
-                break;
-            default:
-                check = 0;
-        }
-
-
-
-        motG=pthread_create(&motG_id, NULL, thread_motG, NULL );
-        if(motG < 0){
-            printf("motor180 degree create error");
-            exit(1);
-        }
-
-
-
-        motR=pthread_create(&motR_id, NULL, thread_motR, (void *)&data);
-        if(motR < 0){
-            printf("motor90 degree create error");
-            exit(1);
-        }
-        motG=pthread_join(motG_id, &t_return);
-        motR=pthread_join(motR_id, &t_return);
+			case 1 :
+				write(fd, color[data - 1], sizeof(char));
+				break;
+			case 2 :
+				write(fd, color[data - 1], sizeof(char));
+				break;
+			case 3 :
+				write(fd, color[data - 1], sizeof(char));
+				break;
+			case 4 :
+				write(fd, color[data - 1], sizeof(char));
+				break;
+			case 5 :
+				write(fd, color[data - 1], sizeof(char));
+				break;
+			case 6 :
+				write(fd, color[data - 1], sizeof(char));
+				break;
+			default:
+				check = 0;
+		}
+		/* root motor code...*/
+		motz=pthread_create(&motor180z_id, NULL, thread_motor180z, (void *)&data);
+		if(motz < 0){
+			printf("motor90 degree create error");
+			exit(1);
+		}
+		motz=pthread_join(motor180z_id, &t_return);
 
 
+		motx=pthread_create(&motor180x_id, NULL, thread_motor180x, NULL);
+		if(motx < 0){
+			printf("motor90 degree create error");
+			exit(1);
+		}
+		motx=pthread_join(motor180x_id, &t_return);
 
-    }
+		Yangle = 0;
+		moty=pthread_create(&motor180y_id, NULL, thread_motor180y, (void *)&Yangle);
+		if(moty < 0){
+			printf("motor180 degree create error");
+			exit(1);
+		}
+		moty=pthread_join(motor180y_id, &t_return);
+	}
 
-    close(fd);
-    return 0;
+	close(fd);
+	return 0;
 }
 
 
-//Move to Sensor using SG90 MOTOR
-void *thread_motS(void *arg) {
+void *thread_motor180x(void *arg){
 
-    int fdS;
-    char data;
+	int fdX;
+	char data;
 
-    fdS=open(MOTORSENSOR_FILE_NAME, O_RDWR);
-    if(fdS<0){
-        fprintf(stderr, "Can't open %s\n", MOTORSENSOR_FILE_NAME);
-        return -1;
-    }
+	fdX=open(MOTOR180x_FILE_NAME, O_RDWR);
+	if(fdX<0){
+		fprintf(stderr, "Can't open %s\n", MOTOR180x_FILE_NAME);
+		return -1;
+	}
 
-    data=0;
-    write(fdS, &data, sizeof(char));
-    sleep(1);
+	data = 1;
+	write(fdX, &data, sizeof(char));
 
-
-    data=1;
-    write(fdS, &data, sizeof(char));
-    sleep(1);
-
-    close(fdS);
-    return 0;
+	close(fdX);
+	return 0;
 }
 
 
-//Open support plate using SG90 MOTOR
-void *thread_motG(void *arg){
+void *thread_motor180y(void *arg) {
 
-    int fdG;
-    char data;
+	int fdY;
+	char data;
 
-    fdG=open(MOTORGATE_FILE_NAME, O_RDWR);
-    if(fdG<0){
-        fprintf(stderr, "Can't open %s\n", MOTORGATE_FILE_NAME);
-        return -1;
-    }
+	fdY=open(MOTOR180y_FILE_NAME, O_RDWR);
+	if(fdY<0){
+		fprintf(stderr, "Can't open %s\n", MOTOR180y_FILE_NAME);
+		return -1;
+	}
 
-    data=0;
-    write(fdG, &data, sizeof(char));
+	data = *(char *)arg;
+	write(fdY, &data, sizeof(char));
 
-
-    data=1;
-    write(fdG, &data, sizeof(char));
-
-    close(fdG);
-    return 0;
+	close(fdY);
+	return 0;
 }
 
+void *thread_motor180z(void *arg) {
 
-//Setting RGB route using SG90 MOTOR
-void *thread_motR(void *arg){
+	int fdZ;
+	char data;
 
-    int fdR;
-    char data = *(char *)arg;
+	fdZ=open(MOTOR180z_FILE_NAME, O_RDWR);
+	if(fdZ<0){
+		fprintf(stderr, "Can't open %s\n", MOTOR180z_FILE_NAME);
+		return -1;
+	}
 
-    fdR=open(MOTORROUTE_FILE_NAME, O_RDWR);
-    if(fdR<0){
-        fprintf(stderr, "Can't open %s\n", MOTORROUTE_FILE_NAME);
-        return -1;
-    }
+	data = *(char *)arg;
+	write(fdZ, &data, sizeof(char));
 
-    write(fdR, &data, sizeof(char));
-
-    close(fdR);
-    return 0;
+	close(fdZ);
+	return 0;
 }
+

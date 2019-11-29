@@ -1,6 +1,6 @@
 FILE = test_test
 KDIR = /root/raspberry/linux
-obj-m := motS_driver.o motG_driver.o motR_driver.o mat_driver.o sensor_driver.o
+obj-m := motx_driver.o moty_driver.o mat_driver.o
 TOOLCHAIN=arm-linux-gnueabihf-
 CC := $(TOOLCHAIN)gcc
 PWD := $(shell pwd)
@@ -20,8 +20,8 @@ install :
 	cp -a $(FILE) /root/raspberry/nfs
 
 sdcard:
-	cp *.ko /media/yeo/rootfs/media/motor
-	cp $(FILE) /media/yeo/rootfs/media/motor
+	cp *.ko /media/mmkser/rootfs/media/motor
+	cp $(FILE) /media/mmkser/rootfs/media/motor
 
 clean :	
 	rm -f *.ko

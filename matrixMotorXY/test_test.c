@@ -88,7 +88,9 @@ int main(int argc, char **argv)
             exit(1);
         }
         moty=pthread_join(motor180y_id, &t_return);
-
+	/* color sensor code...
+	 *
+	 * root motor code...*/
         motx=pthread_create(&motor180x_id, NULL, thread_motor180x, NULL);
         if(motx < 0){
             printf("motor90 degree create error");
