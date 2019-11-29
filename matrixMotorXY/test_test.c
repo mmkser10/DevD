@@ -81,7 +81,7 @@ int main(int argc, char **argv)
             default:
                 check = 0;
         }
-	Yangle = 0;
+	Yangle = 1;
         moty=pthread_create(&motor180y_id, NULL, thread_motor180y, (void *)&Yangle);
         if(moty < 0){
             printf("motor180 degree create error");
