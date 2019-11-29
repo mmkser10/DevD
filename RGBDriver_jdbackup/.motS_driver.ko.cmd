@@ -1,0 +1,1 @@
+cmd_/root/raspberry/DevD/RGBDriver_jdbackup/motS_driver.ko := arm-linux-gnueabihf-ld -EL -r  -T ./scripts/module-common.lds --build-id  -o /root/raspberry/DevD/RGBDriver_jdbackup/motS_driver.ko /root/raspberry/DevD/RGBDriver_jdbackup/motS_driver.o /root/raspberry/DevD/RGBDriver_jdbackup/motS_driver.mod.o
