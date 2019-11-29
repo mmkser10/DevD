@@ -20,6 +20,7 @@ int main(int argc, char **argv)
 {
     int fd, data, motx, moty;
     int check=1;
+    int Xangle, Yangle;
 
     pthread_t motor180x_id;
     pthread_t motor180y_id;
@@ -57,8 +58,6 @@ int main(int argc, char **argv)
         printf("Enter \n1. Red\n2. Green\n3. Blue\n4. Yellow\n5. Purple\n6. Orange\n");
         scanf("%d", &data);
 
-
-
         switch (data) {
 
             case 1 :
@@ -82,16 +81,25 @@ int main(int argc, char **argv)
             default:
                 check = 0;
         }
-        motx=pthread_create(&motor180x_id, NULL, thread_motor180x, (void *)&data);
-        if(motx < 0){
+	Yangle = 0;
+        moty=pthread_create(&motor180y_id, NULL, thread_motor180y, (void *)&Yangle);
+        if(moty < 0){
             printf("motor180 degree create error");
+            exit(1);
+        }
+        moty=pthread_join(motor180y_id, &t_return);
+
+        motx=pthread_create(&motor180x_id, NULL, thread_motor180x, NULL);
+        if(motx < 0){
+            printf("motor90 degree create error");
             exit(1);
         }
         motx=pthread_join(motor180x_id, &t_return);
 
-        moty=pthread_create(&motor180y_id, NULL, thread_motor180y, NULL);
+	Yangle = 0;
+        moty=pthread_create(&motor180y_id, NULL, thread_motor180y, (void *)&Yangle);
         if(moty < 0){
-            printf("motor90 degree create error");
+            printf("motor180 degree create error");
             exit(1);
         }
         moty=pthread_join(motor180y_id, &t_return);
@@ -105,7 +113,7 @@ int main(int argc, char **argv)
 void *thread_motor180x(void *arg){
 
     int fdX;
-    char data = *(char *)arg;
+    char data;
 
     fdX=open(MOTOR180x_FILE_NAME, O_RDWR);
     if(fdX<0){
@@ -113,6 +121,7 @@ void *thread_motor180x(void *arg){
         return -1;
     }
 
+    data = 2;
     write(fdX, &data, sizeof(char));
 
     close(fdX);
@@ -131,11 +140,9 @@ void *thread_motor180y(void *arg) {
         return -1;
     }
 
-    data = 0;
+    data = *(char *)arg;
     write(fdY, &data, sizeof(char));
 	
-    data = 1;
-    write(fdY, &data, sizeof(char));
     close(fdY);
     return 0;
 }

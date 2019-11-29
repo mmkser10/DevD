@@ -36,7 +36,7 @@ static struct file_operations motor180y_fops=
         {
                 .owner	=THIS_MODULE,
                 .open	=motor180y_open,
-                .release=motor180y_release,
+                .release =motor180y_release,
                 .write	=motor180y_write,
         };
 
@@ -48,8 +48,6 @@ static int motor180y_init(void){
         return result;
     }
 }
-
-
 
 
 static void motor180y_exit(void){
@@ -104,7 +102,7 @@ static int motor180y_write(struct file *minode, const char *gdata, size_t length
 
 
     if(tmp_buf==0){
-	    for(x=35;x>=0;x--){
+	    for(x=20;x>=0;x--){
             setClock=(minAngle+((maxAngle-minAngle)/40*x));
             clrClock=frequency-setClock;
             *(motor180y+7)=(0x01<<GPIO);
@@ -113,8 +111,9 @@ static int motor180y_write(struct file *minode, const char *gdata, size_t length
             udelay(clrClock);
         }
     }
+
     else{
-	    for(x=0;x<=35;x++){
+	    for(x=0;x<=20;x++){
             setClock=(minAngle+((maxAngle-minAngle)/40*x));
             clrClock=frequency-setClock;
             *(motor180y+7)=(0x01<<GPIO);
@@ -129,6 +128,7 @@ static int motor180y_write(struct file *minode, const char *gdata, size_t length
 
 static int motor180y_release(struct inode *minode, struct file *mfile){
     motor180y_usage=0;
-    if(motor180y) iounmap(motor180y);
+    if(motor180y) 
+	    iounmap(motor180y);
     return 0;
 }
