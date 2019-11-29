@@ -57,8 +57,7 @@ int main(int argc, char **argv)
 	}
 
 	while(check) {
-		printf("Enter \n1. Red\n2. Green\n3. Blue\n4. Yellow\n5. Purple\n6. Orange\n");
-		scanf("%d", &data);
+		printf("Program Start..\n");
 
 		Yangle = 1;
 		moty=pthread_create(&motor180y_id, NULL, thread_motor180y, (void *)&Yangle);
@@ -69,30 +68,34 @@ int main(int argc, char **argv)
 		}
 		moty=pthread_join(motor180y_id, &t_return);
 
-		/* color sensor code...*/
+		printf("Enter \n1. Red\n2. Green\n3. Blue\n4. Yellow\n5. Purple\n6. Orange\n");
+                scanf("%d", &data);
+
+		//color sensor code...
 		switch (data) {
 
 			case 1 :
-				write(fd, color[data - 1], sizeof(char));
+				//write(fd, color[data - 1], sizeof(char));
 				break;
 			case 2 :
-				write(fd, color[data - 1], sizeof(char));
+				//write(fd, color[data - 1], sizeof(char));
 				break;
 			case 3 :
-				write(fd, color[data - 1], sizeof(char));
+				//write(fd, color[data - 1], sizeof(char));
 				break;
 			case 4 :
-				write(fd, color[data - 1], sizeof(char));
+				//write(fd, color[data - 1], sizeof(char));
 				break;
 			case 5 :
-				write(fd, color[data - 1], sizeof(char));
+				//write(fd, color[data - 1], sizeof(char));
 				break;
 			case 6 :
-				write(fd, color[data - 1], sizeof(char));
+				//write(fd, color[data - 1], sizeof(char));
 				break;
 			default:
 				check = 0;
 		}
+
 		/* root motor code...*/
 		motz=pthread_create(&motor180z_id, NULL, thread_motor180z, (void *)&data);
 		if(motz < 0){
