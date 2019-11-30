@@ -212,7 +212,7 @@ void *thread_sensor(void *arg) {
     int		sensor_fd;
     char	x;
     char	flag;
-    struct pollfd events[1];
+    struct pollfd events[3];
     int		retval;
     int 	i = 0;
     double	r_value;
@@ -240,8 +240,8 @@ void *thread_sensor(void *arg) {
 
             while (i < 10) {
 
-                events[0].fd = sensor_fd;
-                events[0].events = POLLIN;    // waiting read
+                events[x].fd = sensor_fd;
+                events[x].events = POLLIN;    // waiting read
 
                 retval = poll(events, 1, 100);        // event waiting
                 if (retval < 0) {
@@ -249,7 +249,7 @@ void *thread_sensor(void *arg) {
                     exit(0);
                 }
 
-                if (events[0].revents & POLLIN) {
+                if (events[x].revents & POLLIN) {
                     read(sensor_fd, &flag, 1);
                     i++;
                 }
