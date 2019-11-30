@@ -65,33 +65,34 @@ int main()
                 gettimeofday(&end_time,NULL);
 
                 durationA = (double)(end_time.tv_usec) - (double)(start_time.tv_usec);
-                r_value = 10 / (durationA/1000000);
+                r_value += 10 / (durationA/1000000);
 
-                printf("Red = %f ----- ", r_value);
             }
             if(x == 2){
                 gettimeofday(&end_time,NULL);
 
                 durationB = (double)(end_time.tv_usec) - (double)(start_time.tv_usec);
-                b_value = 10 / (durationB/1000000);
+                b_value += 10 / (durationB/1000000);
 
-                printf("Blue = %f ----- ", b_value);
             }
             if(x == 3){
                 gettimeofday(&end_time,NULL);
 
                 durationC = (double)(end_time.tv_usec) - (double)(start_time.tv_usec);
-                g_value = 10 / (durationC/1000000);
-
-                printf("Green = %f\n", g_value);
+                g_value += 10 / (durationC/1000000);
             }
             i = 0;
+
         }
 
         j++;
 
         sleep(0.1);
     }
+
+    printf("Red = %f ----- ", r_value/10);
+    printf("Blue = %f ----- ", b_value/10);
+    printf("Green = %f\n", g_value/10);
 
     close(sensor_fd);
     return 0;
