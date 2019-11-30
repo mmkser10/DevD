@@ -137,7 +137,7 @@ void *thread_motor180x(void *arg){
 		return -1;
 	}
 
-	data = 1;
+	data = 0;
 	write(fdX, &data, sizeof(char));
 
 	close(fdX);
