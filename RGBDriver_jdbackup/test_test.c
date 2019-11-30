@@ -234,6 +234,7 @@ void *thread_sensor(void *arg) {
 
     while(j < 10){
         for(x=1;x<=3;x++) {
+            sleep(0.1);
             write(sensor_fd, &x, 1);
             gettimeofday(&start_time,NULL);
 
@@ -280,7 +281,7 @@ void *thread_sensor(void *arg) {
         }
 
         j++;
-        sleep(1);
+        sleep(0.1);
     }
 
     r_value=(r_value/10);
