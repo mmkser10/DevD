@@ -95,8 +95,7 @@ static int motor180x_write(struct file *minode, const char *gdata, size_t length
     int x;
     unsigned int setClock;
     unsigned int clrClock;
-    unsigned long delay = jiffies + 3*HZ;
-
+    unsigned long stpDelay = jiffies + 2*HZ;
 
     result=copy_from_user(&tmp_buf, gdata, length);
     if(result<0){
@@ -105,24 +104,26 @@ static int motor180x_write(struct file *minode, const char *gdata, size_t length
     }
     printk("data from user: %d\n", tmp_buf);
 
-    if(tmp_buf==0){
-        for(x=90;x>=45;x--){
-            setClock=(minAngle+((maxAngle-minAngle)/90*x));
-            clrClock=frequency-setClock;
-            *(motor180x+7)=(0x01<<GPIO);
-            udelay(setClock);
-            *(motor180x+10)=(0x01<<GPIO);
-            udelay(clrClock);
-        }
-        while(time_before(jiffies, delay)){}
-        for(x=45;x<=90;x++){
-            setClock=(minAngle+((maxAngle-minAngle)/90*x));
-            clrClock=frequency-setClock;
-            *(motor180x+7)=(0x01<<GPIO);
-            udelay(setClock);
-            *(motor180x+10)=(0x01<<GPIO);
-            udelay(clrClock);
-        }
+
+
+
+    unsigned long delay = jiffies + (int)tmp_buf*HZ;
+    while(time_before(jiffies, delay)){}
+    for(x=90;x>=45;x--){
+        setClock=(minAngle+((maxAngle-minAngle)/90*x));
+        clrClock=frequency-setClock;
+        *(motor180x+7)=(0x01<<GPIO);udelay(setClock);
+        *(motor180x+10)=(0x01<<GPIO);
+        udelay(clrClock);
+    }
+    while(time_before(jiffies, stpDelay)){}
+    for(x=45;x<=90;x++){
+        setClock=(minAngle+((maxAngle-minAngle)/90*x));
+        clrClock=frequency-setClock;
+        *(motor180x+7)=(0x01<<GPIO);
+        udelay(setClock);
+        *(motor180x+10)=(0x01<<GPIO);
+        udelay(clrClock);
     }
 
     return length;
