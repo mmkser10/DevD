@@ -1,0 +1,1 @@
+cmd_/root/raspberry/QWERTY/motz_driver.ko := arm-linux-gnueabihf-ld -EL -r  -T ./scripts/module-common.lds --build-id  -o /root/raspberry/QWERTY/motz_driver.ko /root/raspberry/QWERTY/motz_driver.o /root/raspberry/QWERTY/motz_driver.mod.o
