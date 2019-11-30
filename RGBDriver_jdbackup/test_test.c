@@ -68,21 +68,23 @@ int main(int argc, char **argv)
 
         Yangle = 1;
         moty=pthread_create(&motor180y_id, NULL, thread_motor180y, (void *)&Yangle);
-
         if(moty < 0){
             printf("setting motor degree create error");
             exit(1);
         }
         moty=pthread_join(motor180y_id, &t_return);
 	
-	sleep(1);
+
+
+	sleep(3);
         sensor=pthread_create(&sensor_id, NULL, thread_sensor, NULL);
         if(sensor < 0){
             printf("sensor create error");
             exit(1);
         }
         sensor=pthread_join(sensor_id, &t_return);
-	sleep(1);
+
+	sleep(5);
         //printf("Enter \n1. Red\n2. Green\n3. Blue\n4. Yellow\n5. Purple\n6. Orange\n");
         //scanf("%d", &data_Main);
 
@@ -176,6 +178,7 @@ void *thread_motor180y(void *arg) {
     data = *(char *)arg;
     write(fdY, &data, sizeof(char));
 
+    sleep(4);
     close(fdY);
     return 0;
 }
