@@ -76,7 +76,7 @@ int main(int argc, char **argv)
 
 
 
-        sleep(2);
+        sleep(1);
         sensor=pthread_create(&sensor_id, NULL, thread_sensor, NULL);
         if(sensor < 0){
             printf("sensor create error");
@@ -240,8 +240,8 @@ void *thread_sensor(void *arg) {
 
             while (i < 10) {
 
-                events[x].fd = sensor_fd;
-                events[x].events = POLLIN;    // waiting read
+                events[x-1].fd = sensor_fd;
+                events[x-1].events = POLLIN;    // waiting read
 
                 retval = poll(events, 1, 100);        // event waiting
                 if (retval < 0) {
@@ -249,7 +249,7 @@ void *thread_sensor(void *arg) {
                     exit(0);
                 }
 
-                if (events[x].revents & POLLIN) {
+                if (events[x-1].revents & POLLIN) {
                     read(sensor_fd, &flag, 1);
                     i++;
                 }
