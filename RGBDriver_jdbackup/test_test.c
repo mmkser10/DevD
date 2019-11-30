@@ -16,6 +16,7 @@
 void *thread_motor180x(void *arg);
 void *thread_motor180y(void *arg);
 void *thread_motor180z(void *arg);
+int data_Main;
 
 int main(int argc, char **argv)
 {
@@ -69,10 +70,10 @@ int main(int argc, char **argv)
 		moty=pthread_join(motor180y_id, &t_return);
 
 		printf("Enter \n1. Red\n2. Green\n3. Blue\n4. Yellow\n5. Purple\n6. Orange\n");
-                scanf("%d", &data);
+                scanf("%d", &data_Main);
 
 		//color sensor code...
-		switch (data) {
+		switch (data_Main) {
 
 			case 1 :
 				//write(fd, color[data - 1], sizeof(char));
@@ -97,7 +98,7 @@ int main(int argc, char **argv)
 		}
 
 		/* root motor code...*/
-		motz=pthread_create(&motor180z_id, NULL, thread_motor180z, (void *)&data);
+		motz=pthread_create(&motor180z_id, NULL, thread_motor180z, (void *)&data_Main);
 		if(motz < 0){
 			printf("motor90 degree create error");
 			exit(1);
