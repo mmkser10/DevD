@@ -91,7 +91,7 @@ static int motor180z_write(struct file *minode, const char *gdata, size_t length
     int x;
     unsigned int setClock;
     unsigned int clrClock;
-    unsigned long delay = jiffies + 3*HZ;
+    unsigned long delay;
 
 
     result=copy_from_user(&tmp_buf, gdata, length);
@@ -103,7 +103,6 @@ static int motor180z_write(struct file *minode, const char *gdata, size_t length
 
     if(tmp_buf==1){
         printk("[motz] Active 1\n");
-
         for(x=0;x<=30;x++){
             setClock=(minAngle+((maxAngle-minAngle)/180*x));
             clrClock=frequency-setClock;
@@ -112,6 +111,7 @@ static int motor180z_write(struct file *minode, const char *gdata, size_t length
             *(motor180z+10)=(0x01<<GPIO);
             udelay(clrClock);
         }
+        delay = jiffies + 3*HZ;
         while(time_before(jiffies, delay)){}
         for(x=30;x>=0;x--){
             setClock=(minAngle+((maxAngle-minAngle)/180*x));
@@ -134,6 +134,7 @@ static int motor180z_write(struct file *minode, const char *gdata, size_t length
             *(motor180z+10)=(0x01<<GPIO);
             udelay(clrClock);
         }
+        delay = jiffies + 3*HZ;
         while(time_before(jiffies, delay)){}
         for(x=60;x>=0;x--){
             setClock=(minAngle+((maxAngle-minAngle)/180*x));
@@ -156,6 +157,8 @@ static int motor180z_write(struct file *minode, const char *gdata, size_t length
             *(motor180z+10)=(0x01<<GPIO);
             udelay(clrClock);
         }
+
+        delay = jiffies + 3*HZ;
         while(time_before(jiffies, delay)){}
         for(x=90;x>=0;x--){
             setClock=(minAngle+((maxAngle-minAngle)/180*x));
@@ -178,6 +181,8 @@ static int motor180z_write(struct file *minode, const char *gdata, size_t length
             *(motor180z+10)=(0x01<<GPIO);
             udelay(clrClock);
         }
+
+        delay = jiffies + 3*HZ;
         while(time_before(jiffies, delay)){}
         for(x=120;x>=0;x--){
             setClock=(minAngle+((maxAngle-minAngle)/180*x));
@@ -200,6 +205,8 @@ static int motor180z_write(struct file *minode, const char *gdata, size_t length
             *(motor180z+10)=(0x01<<GPIO);
             udelay(clrClock);
         }
+
+        delay = jiffies + 3*HZ;
         while(time_before(jiffies, delay)){}
         for(x=150;x>=0;x--){
             setClock=(minAngle+((maxAngle-minAngle)/180*x));
@@ -222,6 +229,8 @@ static int motor180z_write(struct file *minode, const char *gdata, size_t length
             *(motor180z+10)=(0x01<<GPIO);
             udelay(clrClock);
         }
+
+        delay = jiffies + 3*HZ;
         while(time_before(jiffies, delay)){}
         for(x=180;x>=0;x--){
             setClock=(minAngle+((maxAngle-minAngle)/180*x));
