@@ -126,7 +126,7 @@ static int motor180z_write(struct file *minode, const char *gdata, size_t length
     else if(tmp_buf==2){
         printk("[motz] Active 2\n");
 
-        for(x=0;x>=60;x--){
+        for(x=0;x<=60;x++){
             setClock=(minAngle+((maxAngle-minAngle)/180*x));
             clrClock=frequency-setClock;
             *(motor180z+7)=(0x01<<GPIO);
@@ -135,7 +135,7 @@ static int motor180z_write(struct file *minode, const char *gdata, size_t length
             udelay(clrClock);
         }
         while(time_before(jiffies, delay)){}
-        for(x=60;x<=0;x++){
+        for(x=60;x>=0;x--){
             setClock=(minAngle+((maxAngle-minAngle)/180*x));
             clrClock=frequency-setClock;
             *(motor180z+7)=(0x01<<GPIO);
