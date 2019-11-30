@@ -14,6 +14,7 @@
 #include <linux/poll.h>
 #include <linux/interrupt.h>
 #include <linux/irq.h>
+#include <linux/jiffies.h>
 
 #define s2 17
 #define s3 18
@@ -126,6 +127,8 @@ static int sensor_write(struct file* mfile, const char* gdata, size_t length, lo
 //        *(color_sensor + 7) |= (0x1 << s3); // s3 H mode green
     }
 
+    unsigned long stpDelay = jiffies + 3*HZ;
+    while(time_before(jiffies, stpDelay)){}
     return length;
 }
 /*
