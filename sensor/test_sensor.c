@@ -47,19 +47,19 @@ int main()
 
             while (i < 10) {
 
-                    events[0].fd = sensor_fd;
-                    events[0].events = POLLIN;    // waiting read
+                events[0].fd = sensor_fd;
+                events[0].events = POLLIN;    // waiting read
 
-                    retval = poll(events, 1, 100);        // event waiting
-                    if (retval < 0) {
-                        fprintf(stderr, "Poll error\n");
-                        exit(0);
-                    }
+                retval = poll(events, 1, 100);        // event waiting
+                if (retval < 0) {
+                    fprintf(stderr, "Poll error\n");
+                    exit(0);
+                }
 
-                    if (events[0].revents & POLLIN) {
-                        read(sensor_fd, &flag, 1);
-                        i++;
-                    }
+                if (events[0].revents & POLLIN) {
+                    read(sensor_fd, &flag, 1);
+                    i++;
+                }
             }
             if(x == 1){
                 gettimeofday(&end_time,NULL);
@@ -90,7 +90,7 @@ int main()
 
         j++;
 
-        sleep(1);
+        sleep(0.1);
     }
 
     close(sensor_fd);

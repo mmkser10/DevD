@@ -1,1 +1,1 @@
-cmd_/root/raspberry/DD/sensor/sensor_driver.ko := arm-linux-gnueabihf-ld -EL -r  -T ./scripts/module-common.lds --build-id  -o /root/raspberry/DD/sensor/sensor_driver.ko /root/raspberry/DD/sensor/sensor_driver.o /root/raspberry/DD/sensor/sensor_driver.mod.o
+cmd_/root/raspberry/DevD/sensor/sensor_driver.ko := arm-linux-gnueabihf-ld -EL -r  -T ./scripts/module-common.lds --build-id  -o /root/raspberry/DevD/sensor/sensor_driver.ko /root/raspberry/DevD/sensor/sensor_driver.o /root/raspberry/DevD/sensor/sensor_driver.mod.o
