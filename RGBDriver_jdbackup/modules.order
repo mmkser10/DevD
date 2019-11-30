@@ -2,3 +2,4 @@ kernel//root/raspberry/DevD/RGBDriver_jdbackup/motx_driver.ko
 kernel//root/raspberry/DevD/RGBDriver_jdbackup/moty_driver.ko
 kernel//root/raspberry/DevD/RGBDriver_jdbackup/motz_driver.ko
 kernel//root/raspberry/DevD/RGBDriver_jdbackup/mat_driver.ko
+kernel//root/raspberry/DevD/RGBDriver_jdbackup/sensor_driver.ko

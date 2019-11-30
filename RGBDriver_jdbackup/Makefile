@@ -1,6 +1,6 @@
 FILE = test_test
 KDIR = /root/raspberry/linux
-obj-m := motx_driver.o moty_driver.o motz_driver.o mat_driver.o
+obj-m := motx_driver.o moty_driver.o motz_driver.o mat_driver.o sensor_driver.o
 TOOLCHAIN=arm-linux-gnueabihf-
 CC := $(TOOLCHAIN)gcc
 PWD := $(shell pwd)
