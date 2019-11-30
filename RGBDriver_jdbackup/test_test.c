@@ -76,7 +76,7 @@ int main(int argc, char **argv)
 
 
 
-        sleep(3);
+        sleep(2);
         sensor=pthread_create(&sensor_id, NULL, thread_sensor, NULL);
         if(sensor < 0){
             printf("sensor create error");
@@ -84,7 +84,7 @@ int main(int argc, char **argv)
         }
         sensor=pthread_join(sensor_id, &t_return);
 
-        sleep(5);
+        sleep(2);
         //printf("Enter \n1. Red\n2. Green\n3. Blue\n4. Yellow\n5. Purple\n6. Orange\n");
         //scanf("%d", &data_Main);
 
@@ -178,7 +178,7 @@ void *thread_motor180y(void *arg) {
     data = *(char *)arg;
     write(fdY, &data, sizeof(char));
 
-    sleep(4);
+    sleep(2);
     close(fdY);
     return 0;
 }
