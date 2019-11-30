@@ -57,8 +57,6 @@ static void motor180z_exit(void){
 	printk("motor180z module removed.\n");
 }
 
-
-
 module_init(motor180z_init);
 module_exit(motor180z_exit);
 MODULE_LICENSE("GPL");
@@ -94,17 +92,18 @@ static int motor180z_write(struct file *minode, const char *gdata, size_t length
 	unsigned int setClock;
 	unsigned int clrClock;
 	unsigned long delay = jiffies + 3*HZ;
-
+	
 
 	result=copy_from_user(&tmp_buf, gdata, length);
 	if(result<0){
 		printk("Error:copy from user");
 		return result;
 	}
-	printk("data from user: %d\n", tmp_buf);
-
+	printk("[motz]data from user: %d\n", result);
 
 	if(tmp_buf==1){
+		printk("[motz] Active 1\n");
+
 		for(x=0;x<=30;x++){
 			setClock=(minAngle+((maxAngle-minAngle)/90*x));
 			clrClock=frequency-setClock;
@@ -124,7 +123,9 @@ static int motor180z_write(struct file *minode, const char *gdata, size_t length
 		}
 	}
 
-	if(tmp_buf==2){
+	else if(tmp_buf==2){
+                printk("[motz] Active 2\n");
+
 		for(x=90;x>=45;x--){
 			setClock=(minAngle+((maxAngle-minAngle)/90*x));
 			clrClock=frequency-setClock;
@@ -144,7 +145,9 @@ static int motor180z_write(struct file *minode, const char *gdata, size_t length
 		}
 	}
 
-	if(tmp_buf==3){
+	else if(tmp_buf==3){
+                printk("[motz] Active 3\n");
+
 		for(x=0;x<=30;x++){
 			setClock=(minAngle+((maxAngle-minAngle)/30*x));
 			clrClock=frequency-setClock;
@@ -164,17 +167,77 @@ static int motor180z_write(struct file *minode, const char *gdata, size_t length
 		}
 	}
 
-	if(tmp_buf==4){
-		printk("Activate 4");
+	else if(tmp_buf==4){
+                printk("[motz] Active 4\n");
+
+		for(x=0;x<=30;x++){
+			setClock=(minAngle+((maxAngle-minAngle)/30*x));
+			clrClock=frequency-setClock;
+			*(motor180z+7)=(0x01<<GPIO);
+			udelay(setClock);
+			*(motor180z+10)=(0x01<<GPIO);
+			udelay(clrClock);
+		}
+		while(time_before(jiffies, delay)){}
+		for(x=30;x>=0;x--){
+			setClock=(minAngle+((maxAngle-minAngle)/30*x));
+			clrClock=frequency-setClock;
+			*(motor180z+7)=(0x01<<GPIO);
+			udelay(setClock);
+			*(motor180z+10)=(0x01<<GPIO);
+			udelay(clrClock);
+		}
 	}
 
-	if(tmp_buf==5){
-		printk("Activate 5");
+	else if(tmp_buf==5){
+                printk("[motz] Active 5\n");
+
+		for(x=0;x<=30;x++){
+                        setClock=(minAngle+((maxAngle-minAngle)/30*x));
+                        clrClock=frequency-setClock;
+                        *(motor180z+7)=(0x01<<GPIO);
+                        udelay(setClock);
+                        *(motor180z+10)=(0x01<<GPIO);
+                        udelay(clrClock);
+                }
+                while(time_before(jiffies, delay)){}
+                for(x=30;x>=0;x--){
+                        setClock=(minAngle+((maxAngle-minAngle)/30*x));
+                        clrClock=frequency-setClock;
+                        *(motor180z+7)=(0x01<<GPIO);
+                        udelay(setClock);
+                        *(motor180z+10)=(0x01<<GPIO);
+                        udelay(clrClock);
+                }
+
 	}
 
-	if(tmp_buf==6){
-		printk("Activate 6");
+	else if(tmp_buf==6){
+		printk("[motz] Active 6\n");
+		for(x=0;x<=30;x++){
+                        setClock=(minAngle+((maxAngle-minAngle)/30*x));
+                        clrClock=frequency-setClock;
+                        *(motor180z+7)=(0x01<<GPIO);
+                        udelay(setClock);
+                        *(motor180z+10)=(0x01<<GPIO);
+                        udelay(clrClock);
+                }
+                while(time_before(jiffies, delay)){}
+                for(x=30;x>=0;x--){
+                        setClock=(minAngle+((maxAngle-minAngle)/30*x));
+                        clrClock=frequency-setClock;
+                        *(motor180z+7)=(0x01<<GPIO);
+                        udelay(setClock);
+                        *(motor180z+10)=(0x01<<GPIO);
+                        udelay(clrClock);
+                }
+
 	}
+
+	else {
+		printk("[motz](else)Not Active\n");
+	}
+
 	return length;
 }
 

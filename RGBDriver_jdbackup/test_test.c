@@ -132,6 +132,7 @@ void *thread_motor180x(void *arg){
 	int fdX;
 	char data;
 
+	puts("---mot x Activate---\n");
 	fdX=open(MOTOR180x_FILE_NAME, O_RDWR);
 	if(fdX<0){
 		fprintf(stderr, "Can't open %s\n", MOTOR180x_FILE_NAME);
@@ -151,6 +152,7 @@ void *thread_motor180y(void *arg) {
 	int fdY;
 	char data;
 
+	puts("---mot y Activate---\n");
 	fdY=open(MOTOR180y_FILE_NAME, O_RDWR);
 	if(fdY<0){
 		fprintf(stderr, "Can't open %s\n", MOTOR180y_FILE_NAME);
@@ -169,6 +171,7 @@ void *thread_motor180z(void *arg) {
 	int fdZ;
 	char data;
 
+	puts("---motor z Activate---\n");
 	fdZ=open(MOTOR180z_FILE_NAME, O_RDWR);
 	if(fdZ<0){
 		fprintf(stderr, "Can't open %s\n", MOTOR180z_FILE_NAME);
