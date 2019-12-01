@@ -54,6 +54,8 @@ int main(int argc, char **argv)
 
     while(check) {
 
+
+        sleep(1);
         printf("Sensor start..\n");
         Yangle = 1;
         moty=pthread_create(&motor180y_id, NULL, thread_motor180y, (void *)&Yangle);
@@ -62,49 +64,20 @@ int main(int argc, char **argv)
             exit(1);
         }
         moty=pthread_join(motor180y_id, &t_return);
+        sleep(1);
 
 
 
-
-        sleep(0.5);
+        sleep(1);
         sensor=pthread_create(&sensor_id, NULL, thread_sensor, NULL);
         if(sensor < 0){
             printf("sensor create error");
             exit(1);
         }
         sensor=pthread_join(sensor_id, &t_return);
-
         sleep(1);
-        printf("d_main %d\n", d_Main);
-
-/*
-        if(11000 < r_value && 14000 > r_value && 7000 < b_value && 9000 > b_value && 6000 < g_value && 8000 > g_value){
-            printf("Red\n");
-            data_Main=1;
-        }
-        else if(10000 < r_value && 12000 > r_value && 10000 < b_value && 14000 > b_value && 7000 < g_value && 9000 > g_value){
-            printf("Purple\n");
-            data_Main=2;
-        }
-        else if(5000 < r_value && 7000 > r_value && 9000 < b_value && 13000 > b_value && 5500 < g_value && 8500 > g_value){
-            printf("Blue\n");
-            data_Main=3;
-        }
-        else if(30000 < r_value && 35000 > r_value && 16000 < b_value && 20000 > b_value && 19000 < g_value && 23000 > g_value){
-            printf("Yellow\n");
-            data_Main=4;
-        }
-        else if(18000 < r_value && 22000 > r_value && 9500 < b_value && 11500 > b_value && 9000 < g_value && 11000 > g_value){
-            printf("Orange\n");
-            data_Main=5;
-        }
-        else if(8000 < r_value && 10000 > r_value && 11000 < b_value && 14000 > b_value && 9000 < g_value && 12000 > g_value){
-            printf("Green\n");
-            data_Main=6;
-        }*/
-
-        printf("Enter \n1. Red\n2. Green\n3. Blue\n4. Yellow\n5. Purple\n6. Orange\n");
-        scanf("%d", &d_Main);
+        
+        sleep(1);
 
         //color sensor code...
         switch (d_Main) {
@@ -210,6 +183,8 @@ int main(int argc, char **argv)
                 return 0;
         }
 
+        sleep(1);
+
         motz=pthread_create(&motor180z_id, NULL, thread_motor180z, (void *)&d_Main);
         if(motz < 0){
             printf("motorz degree create error");
@@ -232,6 +207,8 @@ int main(int argc, char **argv)
             exit(1);
         }
         moty=pthread_join(motor180y_id, &t_return);
+
+        sleep(1);
 
     }
 
@@ -322,7 +299,6 @@ void *thread_sensor(void *arg) {
 
 
     while(j < 10){
-        printf("j = %d\n", j);
         for(x=1;x<=3;x++) {
             sensor_fd[x-1] = open(SENSOR_FILE_NAME, O_RDWR | O_NONBLOCK);
             if (sensor_fd[x-1] < 0)
@@ -332,7 +308,6 @@ void *thread_sensor(void *arg) {
             }
 
             puts("program start\n");
-            printf("x = %d\n", x);
             write(sensor_fd[x-1], &x, 1);
             gettimeofday(&start_time,NULL);
 
@@ -389,7 +364,34 @@ void *thread_sensor(void *arg) {
                 printf("Green..... %f\n", g_value);
 
 
-                d_Main += 1;
+
+                sleep(1);
+
+                if(11000 < r_value && 14000 > r_value && 7000 < b_value && 9000 > b_value && 6000 < g_value && 8000 > g_value){
+                    printf("Red\n");
+                    d_Main=1;
+                }
+                else if(10000 < r_value && 12000 > r_value && 10000 < b_value && 14000 > b_value && 7000 < g_value && 9000 > g_value){
+                    printf("Purple\n");
+                    d_Main=2;
+                }
+                else if(5000 < r_value && 7000 > r_value && 9000 < b_value && 13000 > b_value && 5500 < g_value && 8500 > g_value){
+                    printf("Blue\n");
+                    d_Main=3;
+                }
+                else if(30000 < r_value && 35000 > r_value && 16000 < b_value && 20000 > b_value && 19000 < g_value && 23000 > g_value){
+                    printf("Yellow\n");
+                    d_Main=4;
+                }
+                else if(18000 < r_value && 22000 > r_value && 9500 < b_value && 11500 > b_value && 9000 < g_value && 11000 > g_value){
+                    printf("Orange\n");
+                    d_Main=5;
+                }
+                else if(8000 < r_value && 10000 > r_value && 11000 < b_value && 14000 > b_value && 9000 < g_value && 12000 > g_value){
+                    printf("Green\n");
+                    d_Main=6;
+                }
+
 
                 close(sensor_fd[0]);
                 close(sensor_fd[1]);
@@ -398,7 +400,7 @@ void *thread_sensor(void *arg) {
             }
         }
         j++;
-        sleep(0.1);
+        sleep(0.05);
 
 
     }
