@@ -1,0 +1,1 @@
+cmd_/root/raspberry/DevD/ColorSelector/mat_driver.ko := arm-linux-gnueabihf-ld -EL -r  -T ./scripts/module-common.lds --build-id  -o /root/raspberry/DevD/ColorSelector/mat_driver.ko /root/raspberry/DevD/ColorSelector/mat_driver.o /root/raspberry/DevD/ColorSelector/mat_driver.mod.o

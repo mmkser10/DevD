@@ -13,6 +13,9 @@
 #include <linux/sched.h>
 #include <linux/wait.h>
 #include <linux/delay.h>
+#include <linux/jiffies.h>
+
+
 
 #define motor180y_MAJOR	223
 #define motor180y_NAME	"MOTOR180Y_DRIVER"
@@ -91,7 +94,7 @@ static int motor180y_write(struct file *minode, const char *gdata, size_t length
     int x;
     unsigned int setClock;
     unsigned int clrClock;
-
+    unsigned long delay = jiffies + 1*HZ;
 
     result=copy_from_user(&tmp_buf, gdata, length);
     if(result<0){
@@ -124,6 +127,8 @@ static int motor180y_write(struct file *minode, const char *gdata, size_t length
         }
 
     }
+
+    while(time_before(jiffies, delay)){}
     return length;
 }
 

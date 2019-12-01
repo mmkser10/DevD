@@ -14,6 +14,7 @@
 #define MOTOR180x_FILE_NAME "/dev/motx_driver"
 #define MOTOR180y_FILE_NAME "/dev/moty_driver"
 #define MOTOR180z_FILE_NAME "/dev/motz_driver"
+#define MATRIX_FILE_NAME "/dev/mat_driver"
 #define SENSOR_FILE_NAME "/dev/sensor_driver"
 
 
@@ -22,24 +23,28 @@ pthread_mutex_t mutex;
 void *thread_motor180x(void *arg);
 void *thread_motor180y(void *arg);
 void *thread_motor180z(void *arg);
+void *thread_matrixColor(void *arg);
+void *thread_matrixCount(void *arg);
 void *thread_sensor(void *arg);
 
 
 
 int d_Main;
+int count[6] = {0, };
 
 
 int main(int argc, char **argv)
 {
-    int fd, data, motx, moty, motz, sensor;
+    int fd, data, motx, moty, motz, sensor, matColor, matCount;
     int check=1;
     int Xangle, Yangle;
-    int data_Main;
 
     pthread_t motor180x_id;
     pthread_t motor180y_id;
     pthread_t motor180z_id;
     pthread_t sensor_id;
+    pthread_t matrixColor_id;
+    pthread_t matrixCount_id;
     void *t_return;
 
 
@@ -68,14 +73,8 @@ int main(int argc, char **argv)
             exit(1);
         }
         sensor=pthread_join(sensor_id, &t_return);
-        printf("Sensor end..\n");
 
-
-        printf("sleep start\n");
-        sleep(3);
-        printf("sleep end\n");
-
-
+        sleep(1);
         printf("d_main %d\n", d_Main);
 
 /*
@@ -105,28 +104,99 @@ int main(int argc, char **argv)
         }*/
 
         printf("Enter \n1. Red\n2. Green\n3. Blue\n4. Yellow\n5. Purple\n6. Orange\n");
-        scanf("%d", &data_Main);
+        scanf("%d", &d_Main);
 
         //color sensor code...
-        switch (data_Main) {
-
+        switch (d_Main) {
             case 1 :
-                //write(fd, color[data - 1], sizeof(char));
+                matColor=pthread_create(&matrixColor_id, NULL, thread_matrixColor, (void *)&d_Main);
+                if(matColor < 0){
+                    printf("Matrix color create error");
+                    exit(1);
+                }
+                matColor=pthread_join(matrixColor_id, &t_return);
+
+                matCount=pthread_create(&matrixCount_id, NULL, thread_matrixCount, (void *)&count[d_Main-1]);
+                if(matColor < 0){
+                    printf("Matrix count create error");
+                    exit(1);
+                }
+                matCount=pthread_join(matrixCount_id, &t_return);
                 break;
             case 2 :
-                //write(fd, color[data - 1], sizeof(char));
+                matColor=pthread_create(&matrixColor_id, NULL, thread_matrixColor, (void *)&d_Main);
+                if(matColor < 0){
+                    printf("Matrix color create error");
+                    exit(1);
+                }
+                matColor=pthread_join(matrixColor_id, &t_return);
+
+                matCount=pthread_create(&matrixCount_id, NULL, thread_matrixCount, (void *)&count[d_Main-1]);
+                if(matColor < 0){
+                    printf("Matrix count create error");
+                    exit(1);
+                }
+                matCount=pthread_join(matrixCount_id, &t_return);
                 break;
             case 3 :
-                //write(fd, color[data - 1], sizeof(char));
+                matColor=pthread_create(&matrixColor_id, NULL, thread_matrixColor, (void *)&d_Main);
+                if(matColor < 0){
+                    printf("Matrix color create error");
+                    exit(1);
+                }
+                matColor=pthread_join(matrixColor_id, &t_return);
+
+                matCount=pthread_create(&matrixCount_id, NULL, thread_matrixCount, (void *)&count[d_Main-1]);
+                if(matColor < 0){
+                    printf("Matrix count create error");
+                    exit(1);
+                }
+                matCount=pthread_join(matrixCount_id, &t_return);
                 break;
             case 4 :
-                //write(fd, color[data - 1], sizeof(char));
+                matColor=pthread_create(&matrixColor_id, NULL, thread_matrixColor, (void *)&d_Main);
+                if(matColor < 0){
+                    printf("Matrix color create error");
+                    exit(1);
+                }
+                matColor=pthread_join(matrixColor_id, &t_return);
+
+                matCount=pthread_create(&matrixCount_id, NULL, thread_matrixCount, (void *)&count[d_Main-1]);
+                if(matColor < 0){
+                    printf("Matrix count create error");
+                    exit(1);
+                }
+                matCount=pthread_join(matrixCount_id, &t_return);
                 break;
             case 5 :
-                //write(fd, color[data - 1], sizeof(char));
+                matColor=pthread_create(&matrixColor_id, NULL, thread_matrixColor, (void *)&d_Main);
+                if(matColor < 0){
+                    printf("Matrix color create error");
+                    exit(1);
+                }
+                matColor=pthread_join(matrixColor_id, &t_return);
+
+                matCount=pthread_create(&matrixCount_id, NULL, thread_matrixCount, (void *)&count[d_Main-1]);
+                if(matColor < 0){
+                    printf("Matrix count create error");
+                    exit(1);
+                }
+                matCount=pthread_join(matrixCount_id, &t_return);
                 break;
             case 6 :
-                //write(fd, color[data - 1], sizeof(char));
+                matColor=pthread_create(&matrixColor_id, NULL, thread_matrixColor, (void *)&d_Main);
+                if(matColor < 0){
+                    printf("Matrix color create error");
+                    exit(1);
+                }
+                matColor=pthread_join(matrixColor_id, &t_return);
+
+                matCount=pthread_create(&matrixCount_id, NULL, thread_matrixCount, (void *)&count[d_Main-1]);
+                if(matColor < 0){
+                    printf("Matrix count create error");
+                    exit(1);
+                }
+                matCount=pthread_join(matrixCount_id, &t_return);
                 break;
             default:
                 check = 0;
@@ -134,15 +204,15 @@ int main(int argc, char **argv)
                 return 0;
         }
 
-        motz=pthread_create(&motor180z_id, NULL, thread_motor180z, (void *)&data_Main);
+        motz=pthread_create(&motor180z_id, NULL, thread_motor180z, (void *)&d_Main);
         if(motz < 0){
-            printf("motor90 degree create error");
+            printf("motorz degree create error");
             exit(1);
         }
 
-        motx=pthread_create(&motor180x_id, NULL, thread_motor180x,  (void *)&data_Main);
+        motx=pthread_create(&motor180x_id, NULL, thread_motor180x,  (void *)&d_Main);
         if(motx < 0){
-            printf("motor90 degree create error");
+            printf("motorx degree create error");
             exit(1);
         }
 
@@ -152,7 +222,7 @@ int main(int argc, char **argv)
         Yangle = 0;
         moty=pthread_create(&motor180y_id, NULL, thread_motor180y, (void *)&Yangle);
         if(moty < 0){
-            printf("motor180 degree create error");
+            printf("motory degree create error");
             exit(1);
         }
         moty=pthread_join(motor180y_id, &t_return);
@@ -261,8 +331,6 @@ void *thread_sensor(void *arg) {
             gettimeofday(&start_time,NULL);
 
             while (i < 10) {
-                printf("i = %d\n", i);
-
                 events[0].fd = sensor_fd[x-1];
                 events[0].events = POLLIN;    // waiting read
 
@@ -315,16 +383,7 @@ void *thread_sensor(void *arg) {
                 printf("Green..... %f\n", g_value);
 
 
-                r_value=0.0;
-                b_value=0.0;
-                g_value=0.0;
-
-
-                printf("Red..... %f\t", r_value);
-
-                pthread_mutex_lock(&mutex);
                 d_Main += 1;
-                pthread_mutex_unlock(&mutex);
 
                 close(sensor_fd[0]);
                 close(sensor_fd[1]);
@@ -339,3 +398,67 @@ void *thread_sensor(void *arg) {
     }
 }
 
+
+void *thread_matrixColor(void *arg) {
+    int fdM_Color;
+    char data;
+
+    char color[6][5] = {
+            0x1, 0x2, 0x1, 0x3, 0x2, // 빨
+            0x4, 0x3, 0x2, 0x2, 0x4, // 초
+            0x1, 0x2, 0x1, 0x2, 0x1, // 파
+            0x2, 0x2, 0x5, 0x5, 0x5, // 노
+            0x1, 0x2, 0x1, 0x3, 0x3, // 보
+            0x0, 0x2, 0x2, 0x2, 0x0, // 주
+    };
+
+
+    fdM_Color = open(MATRIX_FILE_NAME, O_RDWR);
+    if(fdM_Color < 0){
+        fprintf(stderr, "Can't open %s\n",MATRIX_FILE_NAME);
+        return -1;
+    }
+
+
+    data = *(char *)arg;
+    printf("fdM_Color write = %d\n", color[data - 1]);
+    write(fdM_Color, color[data - 1], sizeof(char));
+
+    close(fdM_Color);
+    return 0;
+
+}
+
+
+void *thread_matrixCount(void *arg) {
+    int fdM_Count;
+    char data;
+
+    char num[9][5] = {
+            0x6, 0x6, 0x6, 0x6, 0x6, //1
+            0x0, 0x6, 0x0, 0x3, 0x0, //2
+            0x0, 0x6, 0x0, 0x6, 0x0, //3
+            0x2, 0x2, 0x0, 0x6, 0x6, //4
+            0x0, 0x3, 0x0, 0x6, 0x0, //5
+            0x0, 0x3, 0x0, 0x2, 0x0, //6
+            0x0, 0x6, 0x6, 0x6, 0x6, //7
+            0x0, 0x2, 0x0, 0x2, 0x0, //8
+            0x0, 0x2, 0x0, 0x6, 0x0, //9
+    };
+
+
+    fdM_Count = open(MATRIX_FILE_NAME, O_RDWR);
+    if(fdM_Count < 0){
+        fprintf(stderr, "Can't open %s\n",MATRIX_FILE_NAME);
+        return -1;
+    }
+
+
+    data = *(char *)arg;
+    printf("fdM_Count write = %d\n", num[data - 1]);
+    write(fdM_Count, num[data - 1], sizeof(char));
+
+    close(fdM_Count);
+    return 0;
+
+}
