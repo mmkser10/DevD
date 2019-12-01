@@ -76,7 +76,7 @@ int main(int argc, char **argv)
         }
         sensor=pthread_join(sensor_id, &t_return);
         sleep(1);
-        
+
         sleep(1);
 
         //color sensor code...
@@ -207,7 +207,7 @@ int main(int argc, char **argv)
             exit(1);
         }
         moty=pthread_join(motor180y_id, &t_return);
-
+        d_Main = 0;
         sleep(1);
 
     }
