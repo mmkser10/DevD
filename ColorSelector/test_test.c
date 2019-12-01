@@ -421,7 +421,7 @@ void *thread_matrixColor(void *arg) {
 
 
     data = *(char *)arg;
-    printf("fdM_Color write = %d\n", color[data - 1]);
+    printf("fdM_Color write = %d\n", data);
     write(fdM_Color, color[data - 1], sizeof(char));
 
     close(fdM_Color);
@@ -455,7 +455,7 @@ void *thread_matrixCount(void *arg) {
 
 
     data = *(char *)arg;
-    printf("fdM_Count write = %d\n", num[data - 1]);
+    printf("fdM_Count write = %d\n", data);
     write(fdM_Count, num[data - 1], sizeof(char));
 
     close(fdM_Count);
