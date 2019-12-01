@@ -1,1 +1,0 @@
-cmd_/root/raspberry/DevD/matrixMotorXY/mat_driver.ko := arm-linux-gnueabihf-ld -EL -r  -T ./scripts/module-common.lds --build-id  -o /root/raspberry/DevD/matrixMotorXY/mat_driver.ko /root/raspberry/DevD/matrixMotorXY/mat_driver.o /root/raspberry/DevD/matrixMotorXY/mat_driver.mod.o

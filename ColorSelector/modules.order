@@ -1,0 +1,4 @@
+kernel//root/raspberry/DevD/ColorSelector/motz_driver.ko
+kernel//root/raspberry/DevD/ColorSelector/sensor_driver.ko
+kernel//root/raspberry/DevD/ColorSelector/motx_driver.ko
+kernel//root/raspberry/DevD/ColorSelector/moty_driver.ko

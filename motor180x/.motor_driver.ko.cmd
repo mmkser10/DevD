@@ -1,1 +1,0 @@
-cmd_/root/raspberry/DD/motor/motor_driver.ko := arm-linux-gnueabihf-ld -EL -r  -T ./scripts/module-common.lds --build-id  -o /root/raspberry/DD/motor/motor_driver.ko /root/raspberry/DD/motor/motor_driver.o /root/raspberry/DD/motor/motor_driver.mod.o
