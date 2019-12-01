@@ -13,7 +13,6 @@
 #include <linux/sched.h>
 #include <linux/wait.h>
 #include <linux/delay.h>
-#include <linux/jiffies.h>
 
 
 
@@ -128,7 +127,6 @@ static int motor180y_write(struct file *minode, const char *gdata, size_t length
 
     }
 
-    while(time_before(jiffies, delay)){}
     return length;
 }
 

@@ -66,7 +66,7 @@ int main(int argc, char **argv)
 
 
 
-        sleep(0.5);
+        sleep(2);
         sensor=pthread_create(&sensor_id, NULL, thread_sensor, NULL);
         if(sensor < 0){
             printf("sensor create error");
@@ -421,7 +421,7 @@ void *thread_matrixColor(void *arg) {
 
 
     data = *(char *)arg;
-    printf("fdM_Color write = %d\n", color[data - 1]);
+    printf("color %d\n", data);
     write(fdM_Color, color[data - 1], sizeof(char));
 
     close(fdM_Color);
@@ -454,8 +454,9 @@ void *thread_matrixCount(void *arg) {
     }
 
 
+    
     data = *(char *)arg;
-    printf("fdM_Count write = %d\n", num[data - 1]);
+    printf("count %d\n", data);
     write(fdM_Count, num[data - 1], sizeof(char));
 
     close(fdM_Count);
