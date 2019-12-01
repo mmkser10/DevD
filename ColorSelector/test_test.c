@@ -383,7 +383,7 @@ void *thread_sensor(void *arg) {
                     printf("Yellow\n");
                     d_Main=4;
                 }
-                else if(14000 < r_value && 22000 > r_value && 7500 < b_value && 11500 > b_value && 7000 < g_value && 11000 > g_value){
+                else if(14000 < r_value && 22000 > r_value && 8000 < b_value && 13000 > b_value && 7000 < g_value && 11000 > g_value){
                     printf("Orange\n");
                     d_Main=5;
                 }
