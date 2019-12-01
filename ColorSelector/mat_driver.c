@@ -37,15 +37,10 @@ static int matrix_open(struct inode *minode, struct file *mfile)
         return -EBUSY;
     }
     matrix = (volatile unsigned int *)matrix_map;
-    for (index = 9; index <= 9; ++index)
+    for (index = 2; index <= 9; ++index)
     {
-        *(matrix + 1) &= ~(0x07 << (3 * index));
-        *(matrix + 1) |= (0x01 << (3 * index));
-    }
-    for (index = 0 ; index < 7 ; ++index)
-    {
-        *(matrix + 2) &= ~(0x07 << (3 * index));
-        *(matrix + 2) |= (0x01 << (3 * index));
+        *(matrix) &= ~(0x07 << (3 * index));
+        *(matrix) |= (0x01 << (3 * index));
     }
     return 0;
 }
@@ -77,10 +72,10 @@ static int matrix_write(struct file *mfile, const char *gdata, size_t length, lo
 
     while(time_before(jiffies, delay)) {
         for (i = 0; i < 5; i++) {
-            *(matrix + 7) = (val[i] << 19);
-            *(matrix + 7) = (0x1 << (i + 22));
+            *(matrix + 7) = (val[i] << 2);
+            *(matrix + 7) = (0x1 << (i + 5));
             udelay(1);
-            *(matrix + 10) = (0xFF << 19);
+            *(matrix + 10) = (0xFF << 2);
         }
     }
     return length;
@@ -109,7 +104,7 @@ static int matrix_init(void)
 
 static void matrix_exit(void)
 {
-    *(matrix + 10) = (0xFF << 19);	// clear matrix
+    *(matrix + 10) = (0xFF << 2);	// clear matrix
     unregister_chrdev(MATRIX_MAJOR, MATRIX_NAME);
     printk("MATRIX module removed.\n");
 }
