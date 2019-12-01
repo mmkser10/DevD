@@ -367,27 +367,27 @@ void *thread_sensor(void *arg) {
 
                 sleep(1);
 
-                if(10000 < r_value && 13000 > r_value && 6000 < b_value && 8000 > b_value && 5000 < g_value && 7000 > g_value){
+                if(9000 < r_value && 14000 > r_value && 5000 < b_value && 9000 > b_value && 4000 < g_value && 8000 > g_value){
                     printf("Red\n");
                     d_Main=1;
                 }
-                else if(9000 < r_value && 11000 > r_value && 9000 < b_value && 13000 > b_value && 6000 < g_value && 8000 > g_value){
+                else if(7500 < r_value && 12500 > r_value && 7500 < b_value && 14000 > b_value && 5500 < g_value && 9500 > g_value){
                     printf("Purple\n");
                     d_Main=2;
                 }
-                else if(4000 < r_value && 6000 > r_value && 8000 < b_value && 12000 > b_value && 4500 < g_value && 7500 > g_value){
+                else if(4000 < r_value && 7500 > r_value && 7000 < b_value && 12500 > b_value && 4000 < g_value && 8500 > g_value){
                     printf("Blue\n");
                     d_Main=3;
                 }
-                else if(29000 < r_value && 34000 > r_value && 15000 < b_value && 19000 > b_value && 18000 < g_value && 22000 > g_value){
+                else if(25000 < r_value && 35000 > r_value && 13000 < b_value && 20000 > b_value && 16000 < g_value && 23000 > g_value){
                     printf("Yellow\n");
                     d_Main=4;
                 }
-                else if(17000 < r_value && 21000 > r_value && 8500 < b_value && 10500 > b_value && 8000 < g_value && 10000 > g_value){
+                else if(16000 < r_value && 22000 > r_value && 7500 < b_value && 11500 > b_value && 7000 < g_value && 11000 > g_value){
                     printf("Orange\n");
                     d_Main=5;
                 }
-                else if(7000 < r_value && 9000 > r_value && 10000 < b_value && 13000 > b_value && 8000 < g_value && 11000 > g_value){
+                else if(6000 < r_value && 10000 > r_value && 9000 < b_value && 14000 > b_value && 7000 < g_value && 12000 > g_value){
                     printf("Green\n");
                     d_Main=6;
                 }
@@ -413,11 +413,11 @@ void *thread_matrixColor(void *arg) {
 
     char color[6][5] = {
             0x1, 0x2, 0x1, 0x3, 0x2, // 빨
-            0x4, 0x3, 0x2, 0x2, 0x4, // 초
+            0x1, 0x2, 0x1, 0x3, 0x3, // 보
             0x1, 0x2, 0x1, 0x2, 0x1, // 파
             0x2, 0x2, 0x5, 0x5, 0x5, // 노
-            0x1, 0x2, 0x1, 0x3, 0x3, // 보
             0x0, 0x2, 0x2, 0x2, 0x0, // 주
+            0x4, 0x3, 0x2, 0x2, 0x4, // 초
     };
 
 
