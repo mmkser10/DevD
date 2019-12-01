@@ -115,6 +115,7 @@ int main(int argc, char **argv)
                     exit(1);
                 }
                 matColor=pthread_join(matrixColor_id, &t_return);
+                count[d_Main-1]++;
 
                 matCount=pthread_create(&matrixCount_id, NULL, thread_matrixCount, (void *)&count[d_Main-1]);
                 if(matColor < 0){
@@ -130,6 +131,7 @@ int main(int argc, char **argv)
                     exit(1);
                 }
                 matColor=pthread_join(matrixColor_id, &t_return);
+                count[d_Main-1]++;
 
                 matCount=pthread_create(&matrixCount_id, NULL, thread_matrixCount, (void *)&count[d_Main-1]);
                 if(matColor < 0){
@@ -145,6 +147,7 @@ int main(int argc, char **argv)
                     exit(1);
                 }
                 matColor=pthread_join(matrixColor_id, &t_return);
+                count[d_Main-1]++;
 
                 matCount=pthread_create(&matrixCount_id, NULL, thread_matrixCount, (void *)&count[d_Main-1]);
                 if(matColor < 0){
@@ -160,6 +163,7 @@ int main(int argc, char **argv)
                     exit(1);
                 }
                 matColor=pthread_join(matrixColor_id, &t_return);
+                count[d_Main-1]++;
 
                 matCount=pthread_create(&matrixCount_id, NULL, thread_matrixCount, (void *)&count[d_Main-1]);
                 if(matColor < 0){
@@ -175,6 +179,7 @@ int main(int argc, char **argv)
                     exit(1);
                 }
                 matColor=pthread_join(matrixColor_id, &t_return);
+                count[d_Main-1]++;
 
                 matCount=pthread_create(&matrixCount_id, NULL, thread_matrixCount, (void *)&count[d_Main-1]);
                 if(matColor < 0){
@@ -190,6 +195,7 @@ int main(int argc, char **argv)
                     exit(1);
                 }
                 matColor=pthread_join(matrixColor_id, &t_return);
+                count[d_Main-1]++;
 
                 matCount=pthread_create(&matrixCount_id, NULL, thread_matrixCount, (void *)&count[d_Main-1]);
                 if(matColor < 0){
