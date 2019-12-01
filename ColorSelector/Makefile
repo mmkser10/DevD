@@ -14,6 +14,17 @@ driver :
 
 app :
 	$(CC) -o $(FILE) $(FILE).c -pthread
+setting :
+	mknod /dev/mat_driver c 221 0
+	mknod /dev/motx_driver c 222 0
+	mknod /dev/moty_driver c 223 0
+	mknod /dev/motz_driver c 224 0
+	mknod /dev/sensor_driver c 241 0
+	insmod mat_driver.ko
+	insmod motx_driver.ko
+	insmod moty_driver.ko
+	insmod motz_driver.ko
+	insmod sensor_driver.ko
 
 install :
 	cp -a led_driver.ko /root/raspberry/nfs
