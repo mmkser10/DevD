@@ -66,7 +66,7 @@ int main(int argc, char **argv)
 
 
 
-        sleep(2);
+        sleep(0.5);
         sensor=pthread_create(&sensor_id, NULL, thread_sensor, NULL);
         if(sensor < 0){
             printf("sensor create error");
@@ -115,6 +115,7 @@ int main(int argc, char **argv)
                     exit(1);
                 }
                 matColor=pthread_join(matrixColor_id, &t_return);
+                count[d_Main-1]++;
 
                 matCount=pthread_create(&matrixCount_id, NULL, thread_matrixCount, (void *)&count[d_Main-1]);
                 if(matColor < 0){
@@ -130,6 +131,7 @@ int main(int argc, char **argv)
                     exit(1);
                 }
                 matColor=pthread_join(matrixColor_id, &t_return);
+                count[d_Main-1]++;
 
                 matCount=pthread_create(&matrixCount_id, NULL, thread_matrixCount, (void *)&count[d_Main-1]);
                 if(matColor < 0){
@@ -145,6 +147,7 @@ int main(int argc, char **argv)
                     exit(1);
                 }
                 matColor=pthread_join(matrixColor_id, &t_return);
+                count[d_Main-1]++;
 
                 matCount=pthread_create(&matrixCount_id, NULL, thread_matrixCount, (void *)&count[d_Main-1]);
                 if(matColor < 0){
@@ -160,6 +163,7 @@ int main(int argc, char **argv)
                     exit(1);
                 }
                 matColor=pthread_join(matrixColor_id, &t_return);
+                count[d_Main-1]++;
 
                 matCount=pthread_create(&matrixCount_id, NULL, thread_matrixCount, (void *)&count[d_Main-1]);
                 if(matColor < 0){
@@ -175,6 +179,7 @@ int main(int argc, char **argv)
                     exit(1);
                 }
                 matColor=pthread_join(matrixColor_id, &t_return);
+                count[d_Main-1]++;
 
                 matCount=pthread_create(&matrixCount_id, NULL, thread_matrixCount, (void *)&count[d_Main-1]);
                 if(matColor < 0){
@@ -190,6 +195,7 @@ int main(int argc, char **argv)
                     exit(1);
                 }
                 matColor=pthread_join(matrixColor_id, &t_return);
+                count[d_Main-1]++;
 
                 matCount=pthread_create(&matrixCount_id, NULL, thread_matrixCount, (void *)&count[d_Main-1]);
                 if(matColor < 0){
@@ -421,7 +427,7 @@ void *thread_matrixColor(void *arg) {
 
 
     data = *(char *)arg;
-    printf("color %d\n", data);
+    printf("fdM_Color write = %d\n", color[data - 1]);
     write(fdM_Color, color[data - 1], sizeof(char));
 
     close(fdM_Color);
@@ -454,9 +460,8 @@ void *thread_matrixCount(void *arg) {
     }
 
 
-    
     data = *(char *)arg;
-    printf("count %d\n", data);
+    printf("fdM_Count write = %d\n", num[data - 1]);
     write(fdM_Count, num[data - 1], sizeof(char));
 
     close(fdM_Count);
