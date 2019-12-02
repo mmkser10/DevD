@@ -368,12 +368,12 @@ void *thread_sensor(void *arg) {
 
                 if(9000 < r_value && 14000 > r_value && 5000 < b_value && 9000 > b_value && 4000 < g_value && 8000 > g_value){
                     printf("Red\n");
-                    d_Main=1;
-                }
-                else if(7500 < r_value && 12500 > r_value && 7500 < b_value && 14000 > b_value && 5500 < g_value && 9500 > g_value){
-                    printf("Purple\n");
                     d_Main=2;
                 }
+             /*   else if(7500 < r_value && 12500 > r_value && 7500 < b_value && 14000 > b_value && 5500 < g_value && 9500 > g_value){
+                    printf("Purple\n");
+                    d_Main=2;
+                }*/
                 else if(4000 < r_value && 7500 > r_value && 7000 < b_value && 12500 > b_value && 4000 < g_value && 8500 > g_value){
                     printf("Blue\n");
                     d_Main=3;
