@@ -206,7 +206,7 @@ static int motor180z_write(struct file *minode, const char *gdata, size_t length
             udelay(clrClock);
         }
 
-        delay = jiffies + 4*HZ;
+        delay = jiffies + 3*HZ;
         while(time_before(jiffies, delay)){}
         for(x=150;x>=0;x--){
             setClock=(minAngle+((maxAngle-minAngle)/180*x));
@@ -230,7 +230,7 @@ static int motor180z_write(struct file *minode, const char *gdata, size_t length
             udelay(clrClock);
         }
 
-        delay = jiffies + 4*HZ;
+        delay = jiffies + 3*HZ;
         while(time_before(jiffies, delay)){}
         for(x=180;x>=0;x--){
             setClock=(minAngle+((maxAngle-minAngle)/180*x));

@@ -364,7 +364,6 @@ void *thread_sensor(void *arg) {
                 printf("Green..... %f\n", g_value);
 
 
-
                 sleep(1);
 
                 if(9000 < r_value && 14000 > r_value && 5000 < b_value && 9000 > b_value && 4000 < g_value && 8000 > g_value){
